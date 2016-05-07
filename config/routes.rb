@@ -7,6 +7,7 @@ Divi::Application.routes.draw do
   					constraints: { subdomain: 'api' }, path: '/' do
 	scope module: :v1 do
       # All API resources belong here
-  	end
+	  resources :users, :only => [:show]
+    end
   end
 end
