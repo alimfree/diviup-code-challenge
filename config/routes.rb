@@ -8,6 +8,7 @@ Divi::Application.routes.draw do
 	scope module: :v1 do
       # All API resources belong here
 	  resources :users, :only => [:show, :create, :update, :destroy]
-    end
+      resources :sessions, :only => [:create, :destroy]
+	end
   end
 end
