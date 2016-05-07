@@ -28,6 +28,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     arel (4.0.2)
+    bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.1.4)
@@ -40,6 +41,13 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     debug_inspector (0.0.2)
+    devise (3.5.9)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      responders
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.6.0)
@@ -61,6 +69,7 @@ GEM
     mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.12.0)
+    orm_adapter (0.5.0)
     polyglot (0.3.5)
     rack (1.5.5)
     rack-test (0.6.3)
@@ -81,6 +90,8 @@ GEM
     rake (11.1.2)
     rdoc (4.2.2)
       json (~> 1.4)
+    responders (1.1.2)
+      railties (>= 3.2, < 4.2)
     rspec-collection_matchers (1.1.2)
       rspec-expectations (>= 2.99.0.beta1)
     rspec-core (2.99.2)
@@ -126,6 +137,8 @@ GEM
     tzinfo (0.3.49)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
+    warden (1.2.6)
+      rack (>= 1.0)
     web-console (2.3.0)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -139,6 +152,7 @@ DEPENDENCIES
   active_model_serializers
   byebug
   coffee-rails (~> 4.1.0)
+  devise
   factory_girl_rails
   ffaker
   jquery-rails
