@@ -1,7 +1,11 @@
-Rails.application.routes.draw do
+require 'api_constraints'
+
+Divi::Application.routes.draw do
   # API definition
-  namespace :api, defaults: { format: json }, 
+  namespace :api, defaults: { format: :json }, 
   					constraints: { subdomain: 'api' }, path: '/' do
-    # All API resources belong here
+	scope module: :v1 do
+      # All API resources belong here
+  	end
   end
 end
