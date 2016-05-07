@@ -2,8 +2,6 @@ require 'spec_helper'
 
 describe Api::V1::UsersController do
 
-  before(:each) { request.headers['Accept'] = 'application/vnd.localhost.v1' }
-
   describe "GET #show" do
     before(:each) do
 	  @user = FactoryGirl.create :user
@@ -20,9 +18,9 @@ describe Api::V1::UsersController do
   end
 
   describe "POST #create" do
-    context "when successfully crreated" do
+    context "when successfully created" do
 	  before(:each) do
-	    @user_attributes = Factorygirl.attributes_for :user
+	    @user_attributes = FactoryGirl.attributes_for :user
 		post :create, { user: @user_attributes }, format: :json
 	  end
 
@@ -33,7 +31,7 @@ describe Api::V1::UsersController do
 
 	  it { should respond_with 201 }
     end
-	  
+	
 	context "when creation fails" do
 	  before(:each) do
 	    # purposfully omitting required email
@@ -50,6 +48,8 @@ describe Api::V1::UsersController do
 	    user_response = JSON.parse(response.body, symbolize_names: true)
 		expect(user_response[:errors][:email]).to include "can't be blank"
 	  end
+
+	  it { should respond_with 422 }
 	end
   end
 end
