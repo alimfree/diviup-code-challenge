@@ -47,7 +47,8 @@ RSpec.configure do |config|
   # Include test helpers
   config.include Request::JsonHelpers, :type => :controller
   config.include Request::HeadersHelpers, :type => :controller
-
+  config.include Devise::TestHelpers, :type => :controller
+  
   # Send appropriate headers along with each request before test executes
   config.before(:each, type: :controller) do
     include_default_accept_headers
