@@ -7,8 +7,10 @@ Divi::Application.routes.draw do
   					constraints: { subdomain: 'api' }, path: '/' do
 	scope module: :v1 do
       # All API resources belong here
-	  resources :users, :only => [:show, :create, :update, :destroy]
+	  resources :users, :only => [:show, :create, :update, :destroy] do
+        resources :lists, :only => [:show, :index]
+	  end
       resources :sessions, :only => [:create, :destroy]
-	end
+    end
   end
 end
