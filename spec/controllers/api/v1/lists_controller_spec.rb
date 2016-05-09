@@ -11,7 +11,6 @@ describe Api::V1::ListsController do
 
     it "displays user list record by id" do
 	  list_response = json_response[:list]
-	  puts list_response
 	  expect(list_response[:id]).to eql @list.id
     end
 
@@ -33,4 +32,57 @@ describe Api::V1::ListsController do
 
 	it { should respond_with 200 }
   end
+
+  describe "POST #create" do
+    context "when list is successfully created" do
+      before(:each) do
+        user = FactoryGirl.create :user
+        @list_attributes = FactoryGirl.attributes_for :list
+        api_authorization_header user.auth_token 
+        post :create, { user_id: user.id, list: @list_attributes }
+      end
+
+      it "displays the json representation for a newly created list record" do
+        list_response = json_response[:list]
+        expect(list_response[:title]).to eql @list_attributes[:title]
+      end
+
+      it { should respond_with 201 }
+    end
+
+    context "when is not created" do
+      before(:each) do
+        user = FactoryGirl.create :user 
+        # ommited list title
+        @invalid_list_attributes = { description: "Groceries" } 
+        api_authorization_header user.auth_token 
+        post :create, { user_id: user.id, list: @invalid_list_attributes }
+      end
+
+      it "displays an errors json" do
+        list_response = json_response
+        expect(list_response).to have_key(:errors)
+      end
+
+      it "displays json errors on why list could not be created" do
+        list_response = json_response
+        expect(list_response[:errors][:title]).to include "can't be blank"
+      end
+
+      it { should respond_with 422 }
+    end
+  end
+
+  describe "DELETE #destroy" do
+    before(:each) do
+      @user = FactoryGirl.create :user
+      @list = FactoryGirl.create :list, user: @user
+      api_authorization_header @user.auth_token 
+      delete :destroy, { user_id: @user.id, id: @list.id }
+    end
+
+    it { should respond_with 204 }
+  end
+
+
 end
