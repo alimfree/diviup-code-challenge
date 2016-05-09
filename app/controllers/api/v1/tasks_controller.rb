@@ -10,4 +10,20 @@ class Api::V1::TasksController < ApplicationController
   def show
     respond_with current_user.tasks.find(params[:id])
   end
+
+  def create
+    task = current_user.tasks.build(task_params)
+
+    if task.save
+      render json: task, status: 201, location: [:api, current_user, task]
+    else
+      render json: { errors: task.errors }, status: 422
+    end
+  end
+
+private
+
+  def task_params
+    params.require(:task).permit(:title, :description, :complete, :list_id)
+  end
 end
