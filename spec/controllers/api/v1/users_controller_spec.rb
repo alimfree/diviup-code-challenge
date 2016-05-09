@@ -10,7 +10,7 @@ describe Api::V1::UsersController do
 
 
 	it "returns the reporter data on a hash" do
-	  user_response = json_response
+	  user_response = json_response[:user]
 	  expect(user_response[:email]).to eql @user.email
 	end
 
@@ -25,7 +25,7 @@ describe Api::V1::UsersController do
 	  end
 
       it "renders newly created user as json" do
-	    user_response = json_response
+	    user_response = json_response[:user]
 		expect(user_response[:email]).to eql @user_attributes[:email]
 	  end
 
@@ -66,7 +66,7 @@ describe Api::V1::UsersController do
 	  end
 
 	  it "displays updated user as json" do
-	    user_response = json_response
+	    user_response = json_response[:user]
 		expect(user_response[:email]).to eql "fake@google.com"
 	  end
 
