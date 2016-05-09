@@ -54,4 +54,44 @@ describe Api::V1::TasksController do
 
     it { should respond_with 201 }
   end
+
+
+  describe "PUT/PATCH #update" do
+    before(:each) do
+      @user = FactoryGirl.create :user
+      @task = FactoryGirl.create :task, user: @user
+      api_authorization_header @user.auth_token
+    end
+
+    context "when task updates successfully" do
+      before(:each) do
+        patch :update, { user_id: @user.id, id: @task.id, task: { title: "apples", complete: true } }
+      end
+
+      it "renders the json representation for the updated user" do
+        task_response = json_response[:task]
+        expect(task_response[:title]).to eql "apples"
+      end
+
+      it { should respond_with 200 }
+    end
+
+    context "when task update fails" do
+      before(:each) do
+        patch :update, { user_id: @user.id, id: @task.id, task: { complete: nil } }
+      end
+
+      it "displays an errors json" do
+        task_response = json_response
+        expect(task_response).to have_key(:errors)
+      end
+
+      it "renders the json errors on whye the user could not be created" do
+        task_response = json_response
+        expect(task_response[:errors][:complete]).to include "is not included in the list"
+      end
+
+      it { should respond_with 422 }
+    end
+  end
 end
