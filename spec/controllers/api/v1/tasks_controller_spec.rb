@@ -16,6 +16,20 @@ describe Api::V1::TasksController do
       expect(tasks_response).to have(4).items
     end
 
+    it "displays user along with each task" do
+	  tasks_response = json_response[:tasks]
+	  tasks_response.each do |task_response|
+	    expect(task_response[:user]).to be_present
+	  end
+	end
+
+    it "displays list  with each task" do								
+	  tasks_response = json_response[:tasks]
+	  tasks_response.each do |task_response|
+	    expect(task_response[:list]).to be_present
+      end
+	end
+  
     it { should respond_with 200 }
   end
 
@@ -32,6 +46,16 @@ describe Api::V1::TasksController do
       task_response = json_response[:task]
       expect(task_response[:id]).to eql @task.id
     end
+
+	it "displays user as an embeded object" do
+	  task_response = json_response[:task]
+	  expect(task_response[:user][:email]).to eql @task.user.email
+	end
+
+    it "displays list as an embedded object" do
+	  task_response = json_response[:task]
+	  expect(task_response[:list][:title]).to eql @task.list.title
+	end
 
     it { should respond_with 200 }
   end
