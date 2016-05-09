@@ -19,5 +19,8 @@
 # Extra files to ignore
 doc/
 *.swp
+*.swn
+*.swo
+
 *~
 .DS_Store
