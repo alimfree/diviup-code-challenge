@@ -22,6 +22,7 @@ gem 'devise'
 
 # API gems
 gem 'active_model_serializers'
+gem 'rack-cors', :require => 'rack/cors'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc

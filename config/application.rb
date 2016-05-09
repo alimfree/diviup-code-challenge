@@ -29,6 +29,17 @@ module Divi
     # config.i18n.default_locale = :de
 
 
+    # Enable Cross-Origin-Resource-Sharing CORS
+    config.middleware.insert_before 'Rack::Runtime', 'Rack::Cors' do
+      allow do
+        origins '*'
+        resource '*',
+          headers: :any,
+          methods: [:get, :put, :post, :patch, :delete, :options]
+      end
+    end
+
+
 	# don't generate RSpec tests for views and helpers
     config.generators do |g|
 	  g.test_framework :rspec, fixture: true
