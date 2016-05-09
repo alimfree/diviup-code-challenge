@@ -9,7 +9,9 @@ describe Task do
   it { should respond_to(:complete) }
 
   it { should validate_presence_of(:title) }
-  it { should ensure_inclusion_of(:complete).in_array([true, false]) }
+  it { should allow_value(true).for(:complete) }
+  it { should allow_value(false).for(:complete) }
+  it { should_not allow_value(nil).for(:complete) } 
   it { should belong_to :user }
   it { should belong_to :list }
 
