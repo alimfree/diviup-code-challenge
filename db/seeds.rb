@@ -12,5 +12,14 @@ require 'factory_girl_rails'
 
 # Create sample data 
 
-4.times { FactoryGirl.create :user }
-20.times { FactoryGirl.create :list }
+10.times do
+  FactoryGirl.create :user
+end
+
+10.times do
+  FactoryGirl.create :list
+end
+
+10.times do
+  FactoryGirl.create :task
+end
