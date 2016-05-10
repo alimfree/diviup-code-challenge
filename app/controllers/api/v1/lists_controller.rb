@@ -3,11 +3,11 @@ class Api::V1::ListsController < ApplicationController
   respond_to :json
 
   def show
-    respond_with current_user.lists.find(params[:id])
+    respond_with List.find(params[:id])
   end
 
   def index
-    respond_with current_user.lists
+    respond_with List.includes(:user).order(created_at: :desc).all
   end
   
   def create
