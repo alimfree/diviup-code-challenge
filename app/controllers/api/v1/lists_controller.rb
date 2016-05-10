@@ -13,7 +13,7 @@ class Api::V1::ListsController < ApplicationController
   def create
     list = current_user.lists.build(list_params) 
     if list.save
-      render json: list, status: 201, location: [:api, current_user, list] 
+      render json: list, status: 201, location: [:api, list] 
     else
       render json: { errors: list.errors }, status: 422
     end

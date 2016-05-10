@@ -51,7 +51,7 @@ describe Api::V1::ListsController do
         user = FactoryGirl.create :user
         @list_attributes = FactoryGirl.attributes_for :list
         api_authorization_header user.auth_token 
-        post :create, { user_id: user.id, list: @list_attributes }
+        post :create, { list: @list_attributes }
       end
 
       it "displays the json representation for a newly created list record" do

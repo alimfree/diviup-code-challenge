@@ -15,7 +15,7 @@ class Api::V1::TasksController < ApplicationController
     task = current_user.tasks.build(task_params)
 
     if task.save
-      render json: task, status: 201, location: [:api, current_user, task]
+      render json: task, status: 201, location: [:api, task]
     else
       render json: { errors: task.errors }, status: 422
     end
@@ -24,7 +24,7 @@ class Api::V1::TasksController < ApplicationController
   def update
     task = current_user.tasks.find(params[:id])
     if task.update(task_params)
-      render json: task, status: 200, location: [:api, current_user, task] 
+      render json: task, status: 200, location: [:api, task] 
     else
       render json: { errors: task.errors }, status: 422
     end

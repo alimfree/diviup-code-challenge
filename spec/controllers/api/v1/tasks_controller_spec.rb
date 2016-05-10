@@ -68,7 +68,7 @@ describe Api::V1::TasksController do
 
       list = FactoryGirl.create :list
       task_params = { title: "Banana", description: "buy bananas", complete: false, list_id: list.id }
-      post :create, user_id: current_user.id, task: task_params
+      post :create, task: task_params
     end
 
     it "returns newly created user task record" do
@@ -89,7 +89,7 @@ describe Api::V1::TasksController do
 
     context "when task updates successfully" do
       before(:each) do
-        patch :update, { user_id: @user.id, id: @task.id, task: { title: "apples", complete: true } }
+        patch :update, { id: @task.id, task: { title: "apples", complete: true } }
       end
 
       it "renders the json representation for the updated user" do
