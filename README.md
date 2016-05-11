@@ -3,8 +3,8 @@ Diviup Code Callenge is a todo rails api meant to be used with the [divi-fronten
 
 ## Installation
 ```sh
-$ git clone [git-repo-url] diviup-code-challenge
-$ cd divi-frontend
+$ git clone git@github.com:alimfree/diviup-code-challenge.git
+$ cd diviup-code-challenge
 $ bundle install
 $ bundle exec rake db:create
 $ bundle exec rake db:migrate
