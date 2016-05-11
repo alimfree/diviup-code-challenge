@@ -1,5 +1,6 @@
 class Api::V1::ListsController < ApplicationController
   before_action :authenticate_with_token!
+  skip_before_action :authenticate_with_token!, only: [:index, :show]
   respond_to :json
 
   def show
