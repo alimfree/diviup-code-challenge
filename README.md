@@ -14,7 +14,7 @@ $ rails s
 
 ## Running Tests
 
-This project was proudly constructed using TDD process. Rspec serves all unit tests; you can find all tests in the spec directory. Before running test make sure you are in the project's root directory.
+This project was proudly constructed using TDD process. Rspec serves all unit tests; you can find all tests in the spec directory. Before running tests make sure you are in the project's root directory and you have prepared the test databases.
 
 ```sh
 $ cd diviup-code-challenge
