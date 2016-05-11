@@ -11,11 +11,11 @@ describe Authenticable do
   describe "#current_user" do
     before do
       @user = FactoryGirl.create :user
-      request.headers["Authorization"] = @user.auth_token
+      request.headers["Authorization"] = @user.access_token
       authentication.stub(:request).and_return(request)
     end
     it "retrieves current user from authorization header" do
-      expect(authentication.current_user.auth_token).to eql @user.auth_token
+      expect(authentication.current_user.access_token).to eql @user.access_token
     end
   end
 

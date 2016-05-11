@@ -12,14 +12,25 @@ require 'factory_girl_rails'
 
 # Create sample data 
 
-10.times do
-  FactoryGirl.create :user
+
+fake_user = User.create({ email: 'fake@gmail.com', password: 'password', password_confirmation: 'password' })
+
+3.times do
+  list = FactoryGirl.create :list, user_id: fake_user.id
+  10.times do
+	FactoryGirl.create :task, user_id: fake_user.id, list_id: list.id
+  end
 end
 
-10.times do
-  FactoryGirl.create :list
-end
 
 10.times do
-  FactoryGirl.create :task
+  user = FactoryGirl.create :user
+
+  3.times do
+    list = FactoryGirl.create :list, user_id: user.id
+
+    10.times do
+      FactoryGirl.create :task, user_id: user.id, list_id: list.id
+    end
+  end
 end

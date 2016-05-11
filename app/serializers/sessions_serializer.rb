@@ -1,5 +1,5 @@
 class SessionsSerializer < ActiveModel::Serializer
-  attributes :email, :token_type, :user_id, :auth_token
+  attributes :email, :token_type, :user_id, :access_token
 
   def token_type
    	'Bearer'

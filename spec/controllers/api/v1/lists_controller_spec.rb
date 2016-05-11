@@ -4,7 +4,7 @@ describe Api::V1::ListsController do
   describe "GET #show" do
     before(:each) do
 	  current_user = FactoryGirl.create :user
-	  api_authorization_header current_user.auth_token
+	  api_authorization_header current_user.access_token
 	  @list = FactoryGirl.create :list, user: current_user
 	  get :show, user_id: current_user.id, id: @list.id
 	end
@@ -26,7 +26,7 @@ describe Api::V1::ListsController do
     before(:each) do
 	  current_user = FactoryGirl.create :user
 	  4.times { FactoryGirl.create :list, user: current_user }
-	  api_authorization_header current_user.auth_token
+	  api_authorization_header current_user.access_token
 	  get :index, user_id: current_user.id 
 	end
 
@@ -50,7 +50,7 @@ describe Api::V1::ListsController do
       before(:each) do
         user = FactoryGirl.create :user
         @list_attributes = FactoryGirl.attributes_for :list
-        api_authorization_header user.auth_token 
+        api_authorization_header user.access_token 
         post :create, { list: @list_attributes }
       end
 
@@ -67,7 +67,7 @@ describe Api::V1::ListsController do
         user = FactoryGirl.create :user 
         # ommited list title
         @invalid_list_attributes = { description: "Groceries" } 
-        api_authorization_header user.auth_token 
+        api_authorization_header user.access_token 
         post :create, { user_id: user.id, list: @invalid_list_attributes }
       end
 
@@ -89,7 +89,7 @@ describe Api::V1::ListsController do
     before(:each) do
       @user = FactoryGirl.create :user
       @list = FactoryGirl.create :list, user: @user
-      api_authorization_header @user.auth_token 
+      api_authorization_header @user.access_token 
       delete :destroy, { user_id: @user.id, id: @list.id }
     end
 

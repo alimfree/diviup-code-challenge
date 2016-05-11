@@ -6,6 +6,7 @@ Divi::Application.routes.draw do
   namespace :api, defaults: { format: :json } do 
 	scope module: :v1 do
       # All API resources belong here
+    resource :login, only: [:create], controller: :sessions
 	  resources :users, :only => [:show, :create, :update, :destroy]
     resources :lists, :only => [:show, :index, :create, :update, :destroy]
     resources :tasks, :only => [:index, :show, :create, :update]

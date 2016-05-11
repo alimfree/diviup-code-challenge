@@ -6,7 +6,7 @@ describe Api::V1::TasksController do
     before(:each) do
       current_user = FactoryGirl.create :user
       list = FactoryGirl.create :list
-      api_authorization_header current_user.auth_token
+      api_authorization_header current_user.access_token
       4.times { FactoryGirl.create :task, user: current_user, list: list }
       get :index, user_id: current_user.id
     end
@@ -37,7 +37,7 @@ describe Api::V1::TasksController do
     before(:each) do
       current_user = FactoryGirl.create :user
       list = FactoryGirl.create :list
-      api_authorization_header current_user.auth_token
+      api_authorization_header current_user.access_token
       @task = FactoryGirl.create :task, user: current_user, list: list
       get :show, user_id: current_user.id, id: @task.id
     end
@@ -64,7 +64,7 @@ describe Api::V1::TasksController do
   describe "POST #create" do
     before(:each) do
       current_user = FactoryGirl.create :user
-      api_authorization_header current_user.auth_token
+      api_authorization_header current_user.access_token
 
       list = FactoryGirl.create :list
       task_params = { title: "Banana", description: "buy bananas", complete: false, list_id: list.id }
@@ -84,7 +84,7 @@ describe Api::V1::TasksController do
     before(:each) do
       @user = FactoryGirl.create :user
       @task = FactoryGirl.create :task, user: @user
-      api_authorization_header @user.auth_token
+      api_authorization_header @user.access_token
     end
 
     context "when task updates successfully" do

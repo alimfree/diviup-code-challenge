@@ -49,10 +49,10 @@ ActiveRecord::Schema.define(version: 20160509040350) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "auth_token",             default: ""
+    t.string   "access_token",           default: ""
   end
 
-  add_index "users", ["auth_token"], name: "index_users_on_auth_token", unique: true
+  add_index "users", ["access_token"], name: "index_users_on_access_token", unique: true
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 

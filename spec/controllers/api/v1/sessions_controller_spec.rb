@@ -17,7 +17,7 @@ describe Api::V1::SessionsController do
 
       it "returns the correct user when authentication is successful" do
         @user.reload
-	    expect(json_response[:user][:auth_token]).to eql @user.auth_token
+	    expect(json_response[:user][:access_token]).to eql @user.access_token
       end
       it { should respond_with 200 }
     end
@@ -40,7 +40,7 @@ describe Api::V1::SessionsController do
 	before(:each) do
 	  @user = FactoryGirl.create :user
 	  sign_in @user
-	  delete :destroy, id: @user.auth_token
+	  delete :destroy, id: @user.access_token
 	end
     it { should respond_with 204 }											
   end
