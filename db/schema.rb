@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -13,17 +12,19 @@
 
 ActiveRecord::Schema.define(version: 20160509040350) do
 
-  create_table "lists", force: true do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "lists", force: :cascade do |t|
     t.string   "title",       default: ""
     t.text     "description", default: ""
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["user_id"], name: "index_lists_on_user_id", using: :btree
   end
 
-  add_index "lists", ["user_id"], name: "index_lists_on_user_id"
-
-  create_table "tasks", force: true do |t|
+  create_table "tasks", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "list_id"
     t.string   "title",       default: ""
@@ -31,12 +32,11 @@ ActiveRecord::Schema.define(version: 20160509040350) do
     t.boolean  "complete",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["list_id"], name: "index_tasks_on_list_id", using: :btree
+    t.index ["user_id"], name: "index_tasks_on_user_id", using: :btree
   end
 
-  add_index "tasks", ["list_id"], name: "index_tasks_on_list_id"
-  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"
-
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -50,10 +50,9 @@ ActiveRecord::Schema.define(version: 20160509040350) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "access_token",           default: ""
+    t.index ["access_token"], name: "index_users_on_access_token", unique: true, using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["access_token"], name: "index_users_on_access_token", unique: true
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end
