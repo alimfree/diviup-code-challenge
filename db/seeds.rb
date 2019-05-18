@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'factory_bot'
-require 'byebug'
 
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
@@ -15,7 +14,6 @@ require 'byebug'
 
 
 fake_user = User.create({ email: 'fake@gmail.com', password: 'password', password_confirmation: 'password' })
-byebug
 
 3.times do
   list = FactoryBot.create :list, user_id: fake_user.id
