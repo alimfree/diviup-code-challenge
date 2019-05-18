@@ -1,5 +1,4 @@
 class Api::V1::TasksController < ApplicationController
-
   before_action :authenticate_with_token!
   respond_to :json
 
@@ -24,7 +23,7 @@ class Api::V1::TasksController < ApplicationController
   def update
     task = current_user.tasks.find(params[:id])
     if task.update(task_params)
-      render json: task, status: 200, location: [:api, task] 
+      render json: task, status: 200, location: [:api, task]
     else
       render json: { errors: task.errors }, status: 422
     end

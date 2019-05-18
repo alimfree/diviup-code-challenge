@@ -3,7 +3,7 @@ require 'api_constraints'
 Divi::Application.routes.draw do
   devise_for :users
   # API definition
-  namespace :api, defaults: { format: :json } do 
+  namespace :api, defaults: { format: :json } do
 	scope module: :v1 do
       # All API resources belong here
     resource :login, only: [:create], controller: :sessions
